@@ -1,6 +1,6 @@
 package com.ioc.easylibapi.payload.request;
 
-import com.ioc.easylibapi.models.Role;
+import com.ioc.easylibapi.models.user.Role;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -40,14 +40,12 @@ public class SignupRequest {
     /**
      * SignupRequest()
      * builder of the class
-     *
      */
     public SignupRequest() {
     }
 
     /**
      * SignupRequest getters and setters
-     *
      */
     public String getUsername() {
         return username;

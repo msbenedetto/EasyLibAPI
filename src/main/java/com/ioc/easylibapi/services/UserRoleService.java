@@ -1,6 +1,6 @@
 package com.ioc.easylibapi.services;
 
-import com.ioc.easylibapi.models.UserRole;
+import com.ioc.easylibapi.models.user.UserRole;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;

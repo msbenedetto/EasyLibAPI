@@ -1,6 +1,6 @@
 package com.ioc.easylibapi.repository;
 
-import com.ioc.easylibapi.models.UserRole;
+import com.ioc.easylibapi.models.user.UserRole;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.PagingAndSortingRepository;
 

@@ -1,6 +1,6 @@
 package com.ioc.easylibapi.services.impl;
 
-import com.ioc.easylibapi.models.User;
+import com.ioc.easylibapi.models.user.User;
 import com.ioc.easylibapi.repository.UserRepository;
 import com.ioc.easylibapi.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

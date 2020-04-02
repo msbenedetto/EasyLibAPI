@@ -1,7 +1,8 @@
 package com.ioc.easylibapi.controller;
 
-import com.ioc.easylibapi.models.User;
+import com.ioc.easylibapi.models.user.User;
 import com.ioc.easylibapi.payload.request.SignupRequest;
+import com.ioc.easylibapi.payload.request.UpdateRequest;
 import com.ioc.easylibapi.services.UserService;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -23,10 +24,9 @@ import javax.validation.Valid;
 public class UserController extends BaseController<User> {
 
     @Autowired
-    private UserService userService;
-
-    @Autowired
     PasswordEncoder passwordEncoder;
+    @Autowired
+    private UserService userService;
 
     @GetMapping("{id}")
     public User byId(@PathVariable("id") Long id) throws Exception {
@@ -62,9 +62,28 @@ public class UserController extends BaseController<User> {
         return userService.insert(user);
     }
 
+    /*ORIGINAL
     @PutMapping
     public User update(@RequestBody User user) throws Exception {
         return userService.update(user);
+    }*/
+
+    //NEW
+    @PutMapping
+    public User update(@Valid @RequestBody UpdateRequest updateRequest) throws Exception {
+        User user = new User(
+                updateRequest.getUsername(),
+                updateRequest.getEmail(),
+                updateRequest.getFirstname(),
+                updateRequest.getLastname(),
+                updateRequest.getCellphone(),
+                updateRequest.getAddress(),
+                updateRequest.getZipcode(),
+                updateRequest.getCity(),
+                updateRequest.getCountry(),
+                updateRequest.getRole()
+        );
+        return userService.insert(user);
     }
 
     @DeleteMapping("/{id}")

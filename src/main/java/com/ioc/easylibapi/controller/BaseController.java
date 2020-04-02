@@ -11,17 +11,15 @@ import java.util.regex.Pattern;
 
 /**
  * Class BaseController
- * @param <T>
- * allows to paginate the extracted results
- * -> used on UserController, RoleController and UserRoleController
+ *
+ * @param <T> allows to paginate the extracted results
+ *            -> used on UserController, RoleController and UserRoleController
  */
 public class BaseController<T> {
+    public static final String QUERY_REGEX_PATTERN = "(\\w+?)(:|<|>)(\"([^\"]+)\")";
     protected static final String DEFAULT_PAGE = "0";
     protected static final String DEFAULT_SIZE = "20";
     protected static final String DEFAULT_SORT = "asc";
-
-    public static final String QUERY_REGEX_PATTERN = "(\\w+?)(:|<|>)(\"([^\"]+)\")";
-
 
     protected PageRequest pageRequest(int page, int size, String sort, String field) {
 

@@ -1,11 +1,11 @@
 package com.ioc.easylibapi.controller;
 /**
- *
  * @author Eric Rubio, Hassan Zerouali, Mathilde Benedetto
  * copyright 2020
  */
-import com.ioc.easylibapi.models.Role;
-import com.ioc.easylibapi.models.User;
+
+import com.ioc.easylibapi.models.user.Role;
+import com.ioc.easylibapi.models.user.User;
 import com.ioc.easylibapi.payload.request.SignupRequest;
 import com.ioc.easylibapi.payload.response.MessageResponse;
 import com.ioc.easylibapi.repository.RoleRepository;

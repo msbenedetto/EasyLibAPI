@@ -1,4 +1,4 @@
-package com.ioc.easylibapi.models;
+package com.ioc.easylibapi.models.user;
 
 import javax.persistence.*;
 

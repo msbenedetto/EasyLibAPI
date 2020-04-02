@@ -1,6 +1,6 @@
 package com.ioc.easylibapi.services.impl;
 
-import com.ioc.easylibapi.models.UserRole;
+import com.ioc.easylibapi.models.user.UserRole;
 import com.ioc.easylibapi.repository.UserRoleRepository;
 import com.ioc.easylibapi.services.UserRoleService;
 import org.springframework.beans.factory.annotation.Autowired;

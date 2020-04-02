@@ -1,5 +1,7 @@
-package com.ioc.easylibapi.models;
+package com.ioc.easylibapi.models.user;
 
+import com.ioc.easylibapi.models.booking.Booking;
+import com.ioc.easylibapi.models.loan.Loan;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -57,6 +59,20 @@ public class User implements UserDetails {
     private String country;
 
 
+    @OneToMany(
+            mappedBy = "user",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Booking> booking;
+
+    @OneToMany(
+            mappedBy = "user",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Loan> loan;
+
 
     @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinTable(
@@ -64,9 +80,39 @@ public class User implements UserDetails {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-
-
     private List<Role> roles = new ArrayList<>();
+
+    public User() {
+    }
+
+    //Constructor for the SignupRequest
+    public User(String username, String email, String password, String firstname, String lastname, String cellphone, String address, int zipcode, String city, String country, List<Role> roles) {
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.cellphone = cellphone;
+        this.address = address;
+        this.zipcode = zipcode;
+        this.city = city;
+        this.country = country;
+        this.roles = roles;
+    }
+
+    //Constructor for the UpdateRequest
+    public User(String username, String email, String firstname, String lastname, String cellphone, String address, int zipcode, String city, String country, List<Role> role) {
+        this.email = email;
+        this.username = username;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.cellphone = cellphone;
+        this.address = address;
+        this.zipcode = zipcode;
+        this.city = city;
+        this.country = country;
+        this.roles = roles;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -86,9 +132,17 @@ public class User implements UserDetails {
         return this.password;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Override
     public String getUsername() {
         return this.username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     @Override
@@ -111,27 +165,12 @@ public class User implements UserDetails {
         return true;
     }
 
-
-    public User() {
-    }
-
-    public User(String username, String email, String password, String firstname, String lastname, String cellphone, String address, int zipcode, String city, String country, List<Role> roles) {
-        this.email = email;
-        this.username = username;
-        this.password = password;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.cellphone = cellphone;
-        this.address = address;
-        this.zipcode = zipcode;
-        this.city = city;
-        this.country = country;
-        this.roles = roles;
-    }
-
-
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Long getUserId() {
@@ -140,18 +179,6 @@ public class User implements UserDetails {
 
     public void setUserId(int Long) {
         this.id = id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getFirstName() {
@@ -218,4 +245,11 @@ public class User implements UserDetails {
         this.country = country;
     }
 
+    public List<Booking> getBooking() {
+        return booking;
+    }
+
+    public void setBooking(List<Booking> booking) {
+        this.booking = booking;
+    }
 }

@@ -1,11 +1,11 @@
 package com.ioc.easylibapi;
 /**
- *
  * @author Eric Rubio, Hassan Zerouali, Mathilde Benedetto
  * copyright 2020
  */
+
 import com.ioc.easylibapi.config.SwaggerConfiguration;
-import com.ioc.easylibapi.models.User;
+import com.ioc.easylibapi.models.user.User;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -33,7 +33,12 @@ public class EasyLibApiApplication implements WebMvcConfigurer {
         SpringApplication.run(EasyLibApiApplication.class, args);
     }
 
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("swagger-ui.html")
+                .addResourceLocations("classpath:/META-INF/resources/");
 
+    }
 
     @Configuration
     @EnableJpaAuditing
@@ -46,12 +51,5 @@ public class EasyLibApiApplication implements WebMvcConfigurer {
                     .map(Authentication::getPrincipal)
                     .map(User.class::cast);
         }
-    }
-
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("swagger-ui.html")
-                .addResourceLocations("classpath:/META-INF/resources/");
-
     }
 }

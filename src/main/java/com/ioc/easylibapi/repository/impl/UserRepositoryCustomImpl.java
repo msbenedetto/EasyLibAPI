@@ -1,6 +1,6 @@
 package com.ioc.easylibapi.repository.impl;
 
-import com.ioc.easylibapi.models.User;
+import com.ioc.easylibapi.models.user.User;
 import com.ioc.easylibapi.repository.UserRepositoryCustom;
 
 import javax.persistence.EntityManager;

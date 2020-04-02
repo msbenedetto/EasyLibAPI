@@ -1,12 +1,13 @@
 package com.ioc.easylibapi.controller;
 
-import com.ioc.easylibapi.models.UserRole;
+import com.ioc.easylibapi.models.user.UserRole;
 import com.ioc.easylibapi.services.UserRoleService;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
+
 /**
  * Class UserRoleController
  * core class where are declared the methods allowing to extract / insert / update / delete the userrole information

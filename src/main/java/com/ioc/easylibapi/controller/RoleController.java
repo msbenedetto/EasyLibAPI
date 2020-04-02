@@ -1,6 +1,6 @@
 package com.ioc.easylibapi.controller;
 
-import com.ioc.easylibapi.models.Role;
+import com.ioc.easylibapi.models.user.Role;
 import com.ioc.easylibapi.services.RoleService;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -25,7 +25,6 @@ public class RoleController extends BaseController {
     public Role byId(@PathVariable("id") Long id) throws Exception {
         return roleService.findById(id);
     }
-
 
 
     @ApiResponses(value = {@ApiResponse(code = 200, message = "OK", response = Role.class)})
