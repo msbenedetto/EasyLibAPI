@@ -49,6 +49,7 @@ public class Library {
     /**
      * Library GETTERS AND SETTERS
      */
+
     public Long getId() {
         return id;
     }

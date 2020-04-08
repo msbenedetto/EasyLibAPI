@@ -13,7 +13,15 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+/**
+ * Class User
+ * model type of class, describes the User object (user table)
+ * We define the link between User and the other tables, such as:
+ * UserStatus, UserRole, Loan and Booking
+ * OneToMany: 1 user may have different roles, status, loan and booking
+ * cascade.ALL, since we want all the operations to be authorized on related entities
+ * orphanRemoval = true, because if wedelete a user, we want to delete everything that is linked to him/her
+ */
 @Entity
 @Table(name = "user", schema = "public")
 public class User implements UserDetails {
@@ -58,7 +66,6 @@ public class User implements UserDetails {
     @Column(name = "country", nullable = true)
     private String country;
 
-
     @OneToMany(
             mappedBy = "user",
             cascade = CascadeType.ALL,
@@ -72,7 +79,6 @@ public class User implements UserDetails {
             orphanRemoval = true
     )
     private List<Loan> loan;
-
 
     @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinTable(
@@ -118,6 +124,10 @@ public class User implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles == null || roles.isEmpty() ? null : this.roles.stream().map(role -> new SimpleGrantedAuthority(role.getRoleName())).collect(Collectors.toSet());
     }
+
+    /**
+     * User GETTERS AND SETTERS
+     */
 
     public List<Role> getRoles() {
         return roles;
@@ -251,5 +261,29 @@ public class User implements UserDetails {
 
     public void setBooking(List<Booking> booking) {
         this.booking = booking;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public List<Loan> getLoan() {
+        return loan;
+    }
+
+    public void setLoan(List<Loan> loan) {
+        this.loan = loan;
     }
 }

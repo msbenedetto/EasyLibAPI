@@ -1,4 +1,4 @@
-package com.ioc.easylibapi.models.items;
+package com.ioc.easylibapi.models.enumerations;
 
 public enum CopyStatus {
     AVAILABLE,

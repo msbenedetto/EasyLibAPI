@@ -6,6 +6,7 @@ package com.ioc.easylibapi;
 
 import com.ioc.easylibapi.config.SwaggerConfiguration;
 import com.ioc.easylibapi.models.user.User;
+import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -25,6 +26,9 @@ import java.util.Optional;
  * Class EasyLibApiApplication
  * Starting point of the application
  */
+@Configuration
+@EnableEncryptableProperties
+//@PropertySource(name="EncryptedProperties", value = "classpath:encrypted.properties")
 @SpringBootApplication
 @Import(SwaggerConfiguration.class)
 public class EasyLibApiApplication implements WebMvcConfigurer {

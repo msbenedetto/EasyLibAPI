@@ -37,13 +37,9 @@ public class BookingDetail {
     @Column(name = "bd_status")
     private BookingStatus status;
 
-
-
     /**
      * BookingDetail GETTERS AND SETTERS
      */
-    public BookingDetail() {
-    }
 
     public Long getId() {
         return id;
@@ -61,7 +57,13 @@ public class BookingDetail {
         this.booking = booking;
     }
 
+    public Copy getCopy() {
+        return copy;
+    }
 
+    public void setCopy(Copy copy) {
+        this.copy = copy;
+    }
 
     public BookingStatus getStatus() {
         return status;
@@ -69,13 +71,5 @@ public class BookingDetail {
 
     public void setStatus(BookingStatus status) {
         this.status = status;
-    }
-
-    public Copy getCopy() {
-        return copy;
-    }
-
-    public void setCopy(Copy copy) {
-        this.copy = copy;
     }
 }

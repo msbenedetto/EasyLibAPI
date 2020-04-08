@@ -7,6 +7,11 @@ import javax.validation.constraints.NotEmpty;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Class Role
+ * model type of class, describes the Role object (role table)
+ * We define the link between User and Role by a ManyToMany, using the mapping "roles"
+ */
 @Entity
 @Table(name = "role")
 public class Role {
@@ -23,6 +28,9 @@ public class Role {
     @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
     @JsonIgnore
 
+    /**
+     * Role GETTERS AND SETTERS
+     */
 
     private Set<User> users = new HashSet<>();
 

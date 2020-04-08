@@ -5,31 +5,20 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
-@DiscriminatorValue("1")
-public class Book extends Item{
-
-    @Column (nullable = true)
-    private  String author;
-
+@DiscriminatorValue("3")
+public class Eresource extends Item{
     @Column(nullable = true)
-    private String ISBN;
+    private String author;
 
     /**
-     * Book GETTERS AND SETTERS
+     * Eresource GETTERS AND SETTERS
      */
+
     public String getAuthor() {
         return author;
     }
 
     public void setAuthor(String author) {
         this.author = author;
-    }
-
-    public String getISBN() {
-        return ISBN;
-    }
-
-    public void setISBN(String ISBN) {
-        this.ISBN = ISBN;
     }
 }

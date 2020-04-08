@@ -15,13 +15,15 @@ public class UserRole {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private User fkUser;
+    private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id")
-    private Role fkRole;
+    private Role role;
 
-
+    /**
+     * UserRole GETTERS AND SETTERS
+     */
     public Long getId() {
         return id;
     }
@@ -30,20 +32,19 @@ public class UserRole {
         this.id = id;
     }
 
-    public User getFkUser() {
-        return fkUser;
+    public User getUser() {
+        return user;
     }
 
-    public void setFkUser(User fkUser) {
-        this.fkUser = fkUser;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public Role getFkRole() {
-        return fkRole;
+    public Role getRole() {
+        return role;
     }
 
-    public void setFkRole(Role fkRole) {
-        this.fkRole = fkRole;
+    public void setRole(Role role) {
+        this.role = role;
     }
-
 }

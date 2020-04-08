@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-@Service("DvdService")
+@Service("dvdService")
 public class DvdServiceImpl implements DvdService {
 
     @Autowired
