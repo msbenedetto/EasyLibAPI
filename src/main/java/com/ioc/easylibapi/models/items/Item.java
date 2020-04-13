@@ -1,5 +1,7 @@
 package com.ioc.easylibapi.models.items;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.List;
@@ -29,12 +31,14 @@ public class Item {
     @Column(nullable = true)
     private String language;
 
+    @JsonIgnore
     @OneToMany(
             mappedBy = "item",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
+            cascade = CascadeType.MERGE,
+            orphanRemoval = false
     )
     private List<Copy> copies;
+
 
 
 

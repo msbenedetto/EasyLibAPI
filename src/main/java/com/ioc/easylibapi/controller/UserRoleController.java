@@ -37,10 +37,59 @@ public class UserRoleController extends BaseController<UserRole> {
         return userRoleService.findAll(buildSpecification(search), pageRequest(page, size, sort, field));
     }
 
+    //The POST methos below allows us to insert the user <-> role relation we want.
+    // Still it should throw an error when a relation of that kind is already present on the db
     @PostMapping
     public UserRole insert(@RequestBody UserRole userRole) {
         return userRoleService.insert(userRole);
     }
+/// CORRECT ERROR
+    /*
+    @Autowired
+    UserRoleRepository userRoleRepository;
+    @PostMapping
+    public ResponseEntity<?> register(@Valid @RequestBody SignupRequest signUpRequest) {
+        if (userRoleRepository....existsByUsername(signUpRequest.getUsername())) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: Username is already taken!"));
+
+        /*if (userRepository.existsByUsername(signUpRequest.getUsername())) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: Username is already taken!"));
+        }
+
+        if (userRepository.existsByEmail(signUpRequest.getEmail())) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: Email is already in use!"));
+        }
+
+        User user = new User(
+                signUpRequest.getUsername(),
+                signUpRequest.getEmail(),
+                passwordEncoder.encode(signUpRequest.getPassword()),
+                signUpRequest.getFirstname(),
+                signUpRequest.getLastname(),
+                signUpRequest.getCellphone(),
+                signUpRequest.getAddress(),
+                signUpRequest.getZipcode(),
+                signUpRequest.getCity(),
+                signUpRequest.getCountry(),
+                signUpRequest.getRole()
+        );
+
+        Role role = new Role();
+        userRepository.save(user);
+        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));*/
+//    }
+
+
+
+
+
+
 
     @PutMapping
     public UserRole update(@RequestBody UserRole userRole) throws Exception {

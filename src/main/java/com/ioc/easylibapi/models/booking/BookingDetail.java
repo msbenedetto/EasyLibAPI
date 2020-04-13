@@ -1,10 +1,10 @@
 package com.ioc.easylibapi.models.booking;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ioc.easylibapi.models.enumerations.BookingStatus;
 import com.ioc.easylibapi.models.items.Copy;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 
 
 /**
@@ -24,17 +24,18 @@ public class BookingDetail {
     @Column(name = "bd_id")
     Long id;
 
-    @NotEmpty
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "booking_id", nullable = false)
     private Booking booking;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "copy_id", nullable = false)
     private Copy copy;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "bd_status")
+    @Column(name = "bd_status", nullable = false)
     private BookingStatus status;
 
     /**

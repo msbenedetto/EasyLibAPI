@@ -27,8 +27,8 @@ public class UserStatus {
 
     @NotEmpty
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User fkUser;
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @NotEmpty
     @OneToOne(fetch = FetchType.LAZY)
@@ -58,12 +58,12 @@ public class UserStatus {
         this.id = id;
     }
 
-    public User getFkUser() {
-        return fkUser;
+    public User getUser() {
+        return user;
     }
 
-    public void setFkUser(User fkUser) {
-        this.fkUser = fkUser;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Loan getFkLoan() {

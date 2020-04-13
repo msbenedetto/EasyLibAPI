@@ -72,11 +72,10 @@ public class AuthController {
             String username = user.getUsername();
             manager.authenticate(new UsernamePasswordAuthenticationToken(username, user.getPassword()));
             List<String> roles = this.userRepository.findByUsername(username).getRoles().stream().map(role -> role.getRoleName()).collect(Collectors.toList());
-            String token = provider.createToken(username, roles);
-
-            Map<Object, Object> model = new HashMap<>();
+            String token = provider.createToken(username, roles);        Map<Object, Object> model = new HashMap<>();
             model.put("username", username);
             model.put("token", token);
+            model.put("roles", roles);
             return ok(model);
         } catch (AuthenticationException e) {
             return ResponseEntity.ok(new MessageResponse("Invalid username / password supplied!"));
@@ -126,7 +125,7 @@ public class AuthController {
 
         Role role = new Role();
         userRepository.save(user);
-        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+        return ok(new MessageResponse("User registered successfully!"));
     }
 
 

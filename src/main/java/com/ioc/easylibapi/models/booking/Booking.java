@@ -5,7 +5,6 @@ import com.ioc.easylibapi.models.loan.Loan;
 import com.ioc.easylibapi.models.user.User;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import java.sql.Date;
 import java.util.List;
 
@@ -30,23 +29,23 @@ public class Booking {
     @Column(name = "booking_id", nullable = false)
     Long id;
 
-    @NotEmpty
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Column(name = "date_booking")
+    @Column(name = "date_booking", nullable = false)
     private Date date_booking;
 
     @Column(name = "date_collected")
     private Date date_collected;
 
-    @Column(name = "date_limit")
+    @Column(name = "date_limit", nullable = false)
     private Date date_limit;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "booking_status")
+    @Column(name = "booking_status", nullable = false)
     private BookingStatus status;
+
 
     @OneToMany(
             mappedBy = "booking",
@@ -56,7 +55,7 @@ public class Booking {
     private List<BookingDetail> details;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "loan_id", nullable = false)
+    @JoinColumn(name = "loan_id", nullable = true)
     private Loan loan;
 
 

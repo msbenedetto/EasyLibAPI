@@ -51,9 +51,10 @@ public class Loan {
     private Date date_returned;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "loan_status")
+    @Column(name = "loan_status", nullable = false)
     private LoanStatus status;
 
+    // We may have OR NOT a previous booking to build the loan
     @OneToMany(
             mappedBy = "loan",
             cascade = CascadeType.ALL,
@@ -62,7 +63,7 @@ public class Loan {
     private List<LoanDetail> details;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "booking_id", nullable = false)
+    @JoinColumn(name = "booking_id", nullable = true)
     private Booking booking;
 
 

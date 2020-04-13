@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * Class UserController
@@ -25,6 +26,7 @@ public class UserController extends BaseController<User> {
 
     @Autowired
     PasswordEncoder passwordEncoder;
+
     @Autowired
     private UserService userService;
 
@@ -43,6 +45,36 @@ public class UserController extends BaseController<User> {
 
         return userService.findAll(buildSpecification(search), pageRequest(page, size, sort, field));
     }
+
+    //test implementation : HOW TO SEARCH a particular user (list matches)
+    @RequestMapping(method = RequestMethod.GET, value = "/usersearch")
+    @ResponseBody
+    public List<User> searchTwo(@RequestParam(value = "q", required = false) String search,
+                                @RequestParam(value = "page", required = false, defaultValue = DEFAULT_PAGE) int page,
+                                @RequestParam(value = "size", required = false, defaultValue = DEFAULT_SIZE) int size,
+                                @RequestParam(value = "sort", required = false, defaultValue = DEFAULT_SORT) String sort,
+                                @RequestParam(value = "field", required = false, defaultValue = "id") String field) throws Exception {
+        return userService.searchUser(buildSpecification2(search), pageRequest(page, size, sort, field));
+    }
+
+
+    //test Baeldung
+  /*  @RequestMapping(method = RequestMethod.GET, value = "/users")
+    @ResponseBody
+    public List<User> search(@RequestParam(value = "search", required = false) String search) {
+
+        List<SearchCriteria> params = new ArrayList<>();
+        if (search != null) {
+            Pattern pattern = Pattern.compile("(\\w+?)(:|<|>)(\\w+?),");
+            Matcher matcher = pattern.matcher(search + ",");
+            while (matcher.find()) {
+                params.add(new SearchCriteria(matcher.group(1), matcher.group(2), matcher.group(3)));
+            }
+        }
+        return userService.searchUser(params);
+    }*/
+    //test Baeldung
+
 
     @PostMapping
     public User insert(@Valid @RequestBody SignupRequest signUpRequest) {

@@ -27,6 +27,15 @@ public class CdServiceImpl implements CdService {
         return optional.get();
     }
 
+    /*@Override
+    public Cd findByTitle(String title) throws Exception {
+        Optional<Cd> optional = cdRepository.findById(id);
+        if (!optional.isPresent()) {
+            throw new Exception("The Cd with ID: " + id + "couldn't be found.");
+        }
+        return optional.get();
+    }*/
+
     @Override
     public Page<Cd> findAll(Specification<Cd> specs, Pageable pageable) {
         return cdRepository.findAll(specs, pageable);

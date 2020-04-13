@@ -1,10 +1,10 @@
 package com.ioc.easylibapi.models.loan;
 
-import com.ioc.easylibapi.models.items.Copy;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ioc.easylibapi.models.enumerations.LoanStatus;
+import com.ioc.easylibapi.models.items.Copy;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import java.sql.Date;
 
 
@@ -25,12 +25,12 @@ public class LoanDetail {
     @Column(name = "ld_id")
     Long id;
 
-    @NotEmpty
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "loan_id", nullable = false)
     private Loan loan;
 
-    @NotEmpty
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "copy_id", nullable = false)
     private Copy copy;

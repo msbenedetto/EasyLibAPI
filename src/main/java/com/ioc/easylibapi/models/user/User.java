@@ -1,5 +1,6 @@
 package com.ioc.easylibapi.models.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ioc.easylibapi.models.booking.Booking;
 import com.ioc.easylibapi.models.loan.Loan;
 import org.springframework.security.core.GrantedAuthority;
@@ -66,6 +67,15 @@ public class User implements UserDetails {
     @Column(name = "country", nullable = true)
     private String country;
 
+    @JsonIgnore
+    @OneToMany(
+            mappedBy = "user",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<UserStatus> userStatus;
+
+    @JsonIgnore
     @OneToMany(
             mappedBy = "user",
             cascade = CascadeType.ALL,
@@ -73,12 +83,14 @@ public class User implements UserDetails {
     )
     private List<Booking> booking;
 
+    @JsonIgnore
     @OneToMany(
             mappedBy = "user",
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
     private List<Loan> loan;
+
 
     @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinTable(

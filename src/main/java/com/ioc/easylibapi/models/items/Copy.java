@@ -1,5 +1,6 @@
 package com.ioc.easylibapi.models.items;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ioc.easylibapi.models.booking.BookingDetail;
 import com.ioc.easylibapi.models.enumerations.CopyStatus;
 import com.ioc.easylibapi.models.library.Library;
@@ -15,9 +16,10 @@ import java.util.List;
  * ManyToOne: Copy is linked to the Item class and the Library class by ManyToOne
  * OneToMany: Copy is related to the BookingDetail and LoanDetail classes by OneToMany
  * cascade.ALL, since we want all the operations to be authorized on related entities
- * orphanRemoval = true, because if wedelete a user, we want to delete everything that is linked to him/her
+ * orphanRemoval = true, because if we delete a user, we want to delete everything that is linked to him/her
  */
 @Entity
+//@JsonIgnoreProperties("item")
 @Table(name="copy", schema="public")
 public class Copy {
     @Id
@@ -26,10 +28,12 @@ public class Copy {
     @Column(name = "copy_id", nullable = false)
     Long id;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id", nullable = false)
     private Item item;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "library_id", nullable = false)
     private Library library;
@@ -38,6 +42,7 @@ public class Copy {
     @Column(name = "copy_status")
     private CopyStatus status;
 
+    @JsonIgnore
     @OneToMany(
             mappedBy = "copy",
             cascade = CascadeType.ALL,
@@ -45,12 +50,15 @@ public class Copy {
     )
     private List<LoanDetail> loanDetails;
 
+    @JsonIgnore
     @OneToMany(
             mappedBy = "copy",
             cascade = CascadeType.ALL,
             orphanRemoval = false
     )
     private List<BookingDetail> bookingDetails;
+
+
 
     /**
      * Copy GETTERS AND SETTERS

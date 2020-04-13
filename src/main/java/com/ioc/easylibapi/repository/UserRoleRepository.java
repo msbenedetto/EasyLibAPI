@@ -10,4 +10,9 @@ import org.springframework.data.repository.PagingAndSortingRepository;
  */
 public interface UserRoleRepository extends PagingAndSortingRepository<UserRole, Long>, JpaSpecificationExecutor<UserRole>, UserRoleRepositoryCustom {
     UserRole findById(long id);
+    /*UserRole findByUserId(int userId, int roleId);
+
+    Boolean existsByUsername(String username);
+
+    Boolean existsByEmail(String email);*/
 }
