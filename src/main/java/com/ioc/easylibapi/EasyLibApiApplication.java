@@ -28,7 +28,6 @@ import java.util.Optional;
  */
 @Configuration
 @EnableEncryptableProperties
-//@PropertySource(name="EncryptedProperties", value = "classpath:encrypted.properties")
 @SpringBootApplication
 @Import(SwaggerConfiguration.class)
 public class EasyLibApiApplication implements WebMvcConfigurer {

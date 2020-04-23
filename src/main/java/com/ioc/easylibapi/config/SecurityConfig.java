@@ -48,7 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/v2/api-docs",
                         "/swagger-ui.html").permitAll()
                 .antMatchers(HttpMethod.GET, "/public/**").permitAll()
-                /*.antMatchers(HttpMethod.DELETE, "/replace with admin area/**").hasRole("ADMIN")*/
+                //.antMatchers(HttpMethod.DELETE, "/admin/**").hasRole("ROLE_ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .apply(new JwtSecurityConfig(provider));

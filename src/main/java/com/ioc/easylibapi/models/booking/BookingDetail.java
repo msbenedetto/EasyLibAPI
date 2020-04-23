@@ -1,6 +1,6 @@
 package com.ioc.easylibapi.models.booking;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.ioc.easylibapi.models.enumerations.BookingStatus;
 import com.ioc.easylibapi.models.items.Copy;
 
@@ -24,12 +24,14 @@ public class BookingDetail {
     @Column(name = "bd_id")
     Long id;
 
-    @JsonIgnore
+    //@JsonIgnore
+    @JsonBackReference(value="booking")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "booking_id", nullable = false)
     private Booking booking;
 
-    @JsonIgnore
+    //@JsonIgnore
+    @JsonBackReference(value="copybooking")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "copy_id", nullable = false)
     private Copy copy;

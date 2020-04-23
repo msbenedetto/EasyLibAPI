@@ -1,11 +1,20 @@
 package com.ioc.easylibapi.models.items;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.List;
 
+
+/**
+ * Class Item
+ * A core class in this model, as we allow to flexibly add new classes of other kind of possible articles
+ * Item has a serie of common attributes between the different kind of articles.
+ * All other object classes: book, cd, dvd, eresource and magazine are EXTENDING Item
+ * Item is meant to be a description of the article
+ * OneToMany relation with class Copy, that contains instances in the physical world of the description done in Item
+ */
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="item", discriminatorType = DiscriminatorType.INTEGER)
@@ -31,7 +40,8 @@ public class Item {
     @Column(nullable = true)
     private String language;
 
-    @JsonIgnore
+    //@JsonIgnore
+    @JsonManagedReference(value="item")
     @OneToMany(
             mappedBy = "item",
             cascade = CascadeType.MERGE,
@@ -39,7 +49,9 @@ public class Item {
     )
     private List<Copy> copies;
 
-
+    /**
+     * Item GETTERS AND SETTERS
+     */
 
 
     public Long getId() {

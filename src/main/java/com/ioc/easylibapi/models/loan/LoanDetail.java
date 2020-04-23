@@ -1,6 +1,6 @@
 package com.ioc.easylibapi.models.loan;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.ioc.easylibapi.models.enumerations.LoanStatus;
 import com.ioc.easylibapi.models.items.Copy;
 
@@ -25,12 +25,14 @@ public class LoanDetail {
     @Column(name = "ld_id")
     Long id;
 
-    @JsonIgnore
+    //@JsonIgnore
+    @JsonBackReference(value="loan")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "loan_id", nullable = false)
     private Loan loan;
 
-    @JsonIgnore
+    //@JsonIgnore
+    @JsonBackReference(value="copyloan")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "copy_id", nullable = false)
     private Copy copy;
@@ -39,7 +41,7 @@ public class LoanDetail {
     private Date date_returned;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "ld_status")
+    @Column(name = "ld_status", nullable = false)
     private LoanStatus status;
 
 
@@ -54,12 +56,12 @@ public class LoanDetail {
         this.id = id;
     }
 
-    public Loan getFkLoan() {
+    public Loan getLoan() {
         return loan;
     }
 
-    public void setFkLoan(Loan fkLoan) {
-        this.loan = fkLoan;
+    public void setLoan(Loan loan) {
+        this.loan = loan;
     }
 
     public Copy getCopy() {

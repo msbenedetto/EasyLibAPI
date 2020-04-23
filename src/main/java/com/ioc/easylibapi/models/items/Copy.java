@@ -1,6 +1,7 @@
 package com.ioc.easylibapi.models.items;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.ioc.easylibapi.models.booking.BookingDetail;
 import com.ioc.easylibapi.models.enumerations.CopyStatus;
 import com.ioc.easylibapi.models.library.Library;
@@ -28,13 +29,15 @@ public class Copy {
     @Column(name = "copy_id", nullable = false)
     Long id;
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
+    //@JsonIgnore
+    @JsonBackReference(value="item")
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Item.class)
     @JoinColumn(name = "item_id", nullable = false)
     private Item item;
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
+    //@JsonIgnore
+    @JsonBackReference(value="library")
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Library.class)
     @JoinColumn(name = "library_id", nullable = false)
     private Library library;
 
@@ -42,7 +45,8 @@ public class Copy {
     @Column(name = "copy_status")
     private CopyStatus status;
 
-    @JsonIgnore
+    //@JsonIgnore
+    @JsonManagedReference(value="copyloan")
     @OneToMany(
             mappedBy = "copy",
             cascade = CascadeType.ALL,
@@ -50,7 +54,8 @@ public class Copy {
     )
     private List<LoanDetail> loanDetails;
 
-    @JsonIgnore
+    //@JsonIgnore
+    @JsonManagedReference(value="copybooking")
     @OneToMany(
             mappedBy = "copy",
             cascade = CascadeType.ALL,

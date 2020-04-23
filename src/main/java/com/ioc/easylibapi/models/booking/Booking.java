@@ -1,5 +1,7 @@
 package com.ioc.easylibapi.models.booking;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.ioc.easylibapi.models.enumerations.BookingStatus;
 import com.ioc.easylibapi.models.loan.Loan;
 import com.ioc.easylibapi.models.user.User;
@@ -29,6 +31,7 @@ public class Booking {
     @Column(name = "booking_id", nullable = false)
     Long id;
 
+    @JsonBackReference(value="userbooking")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
@@ -46,13 +49,13 @@ public class Booking {
     @Column(name = "booking_status", nullable = false)
     private BookingStatus status;
 
-
+    @JsonManagedReference(value="booking")
     @OneToMany(
             mappedBy = "booking",
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private List<BookingDetail> details;
+    private List<BookingDetail> bookingDetails;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "loan_id", nullable = true)
@@ -103,11 +106,11 @@ public class Booking {
     }
 
     public List<BookingDetail> getDetails() {
-        return details;
+        return bookingDetails;
     }
 
     public void setDetails(List<BookingDetail> details) {
-        this.details = details;
+        this.bookingDetails = details;
     }
 
     public User getUser() {

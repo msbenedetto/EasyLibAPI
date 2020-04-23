@@ -1,6 +1,6 @@
 package com.ioc.easylibapi.models.user;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.ioc.easylibapi.models.booking.Booking;
 import com.ioc.easylibapi.models.loan.Loan;
 import org.springframework.security.core.GrantedAuthority;
@@ -67,7 +67,8 @@ public class User implements UserDetails {
     @Column(name = "country", nullable = true)
     private String country;
 
-    @JsonIgnore
+    //@JsonIgnore
+    @JsonManagedReference(value="userstatus")
     @OneToMany(
             mappedBy = "user",
             cascade = CascadeType.ALL,
@@ -75,7 +76,8 @@ public class User implements UserDetails {
     )
     private List<UserStatus> userStatus;
 
-    @JsonIgnore
+    //@JsonIgnore
+    @JsonManagedReference(value="userbooking")
     @OneToMany(
             mappedBy = "user",
             cascade = CascadeType.ALL,
@@ -83,7 +85,8 @@ public class User implements UserDetails {
     )
     private List<Booking> booking;
 
-    @JsonIgnore
+    //@JsonIgnore
+    @JsonManagedReference(value="userloan")
     @OneToMany(
             mappedBy = "user",
             cascade = CascadeType.ALL,
@@ -297,5 +300,13 @@ public class User implements UserDetails {
 
     public void setLoan(List<Loan> loan) {
         this.loan = loan;
+    }
+
+    public List<UserStatus> getUserStatus() {
+        return userStatus;
+    }
+
+    public void setUserStatus(List<UserStatus> userStatus) {
+        this.userStatus = userStatus;
     }
 }

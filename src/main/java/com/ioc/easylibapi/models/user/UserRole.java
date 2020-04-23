@@ -2,6 +2,11 @@ package com.ioc.easylibapi.models.user;
 
 import javax.persistence.*;
 
+/**
+ * Class UserRole
+ * model type of class, describes the UserRole relationship
+ * This class is meant to allow the role assignation to a specified user, making easier the relation between User and Role in this many to many relationship
+ */
 @Entity
 @Table(name = "user_role", schema = "public")
 public class UserRole {

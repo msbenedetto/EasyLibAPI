@@ -1,11 +1,13 @@
 package com.ioc.easylibapi.models.loan;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.ioc.easylibapi.models.booking.Booking;
 import com.ioc.easylibapi.models.enumerations.LoanStatus;
 import com.ioc.easylibapi.models.user.User;
+import com.ioc.easylibapi.models.user.UserStatus;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import java.sql.Date;
 import java.util.List;
 
@@ -34,16 +36,14 @@ public class Loan {
      * booking_id : attribute links to the booking table
      * This attribute can be empty, as a user can make a booking and then transform it in a loan OR directly go to the library an make the loan
      */
-    @NotEmpty
+    @JsonBackReference(value="userloan")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @NotEmpty
     @Column(name = "date_begin_loan", nullable = false)
     private Date date_begin_loan;
 
-    @NotEmpty
     @Column(name = "date_scheduled_return", nullable = false)
     private Date date_scheduled_return;
 
@@ -54,18 +54,23 @@ public class Loan {
     @Column(name = "loan_status", nullable = false)
     private LoanStatus status;
 
-    // We may have OR NOT a previous booking to build the loan
+    @JsonManagedReference(value="loan")
     @OneToMany(
             mappedBy = "loan",
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private List<LoanDetail> details;
+    private List<LoanDetail> loanDetails;
 
+    // We may have OR NOT a previous booking to build the loan
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "booking_id", nullable = true)
-    private Booking booking;
+    private Booking bookingOrigin;
 
+    // We may have OR NOT a penalty on a loan (if we return the loan too late)
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "us_id", nullable = true)
+    private UserStatus userStatus;
 
     /**
      * Loan GETTERS AND SETTERS
@@ -119,18 +124,35 @@ public class Loan {
     }
 
     public List<LoanDetail> getDetails() {
-        return details;
+        return loanDetails;
     }
 
     public void setDetails(List<LoanDetail> details) {
-        this.details = details;
+        this.loanDetails = details;
     }
 
     public Booking getBooking() {
-        return booking;
+        return bookingOrigin;
     }
 
     public void setBooking(Booking booking) {
-        this.booking = booking;
+        this.bookingOrigin = booking;
     }
+
+    public List<LoanDetail> getLoanDetails() {
+        return loanDetails;
+    }
+
+    public void setLoanDetails(List<LoanDetail> loanDetails) {
+        this.loanDetails = loanDetails;
+    }
+
+    public Booking getBookingOrigin() {
+        return bookingOrigin;
+    }
+
+    public void setBookingOrigin(Booking bookingOrigin) {
+        this.bookingOrigin = bookingOrigin;
+    }
+
 }

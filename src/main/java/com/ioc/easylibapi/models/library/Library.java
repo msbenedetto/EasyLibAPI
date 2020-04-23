@@ -1,5 +1,6 @@
 package com.ioc.easylibapi.models.library;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.ioc.easylibapi.models.items.Copy;
 
 import javax.persistence.*;
@@ -38,6 +39,7 @@ public class Library {
     @Column(nullable = false)
     private String email;
 
+    @JsonManagedReference(value="library")
     @OneToMany(
             mappedBy = "library",
             cascade = CascadeType.ALL,

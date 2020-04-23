@@ -1,10 +1,10 @@
 package com.ioc.easylibapi.models.user;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.ioc.easylibapi.models.enumerations.USEnum;
 import com.ioc.easylibapi.models.loan.Loan;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 
 
@@ -25,31 +25,30 @@ public class UserStatus {
     @Column(name = "us_id")
     Long id;
 
-    @NotEmpty
+    @JsonBackReference(value="userstatus")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @NotEmpty
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "loan_id")
-    private Loan fkLoan;
+    @JoinColumn(name = "loan_id", nullable = true)
+    private Loan loan;
 
-    @NotEmpty
-    @Column(name = "date_begin_penalty")
+    @Column(name = "date_begin_penalty", nullable = false)
     private Date date_begin_penalty;
 
-    @Column(name = "date_end_penalty")
+    @Column(name = "date_end_penalty", nullable = false)
     private Date date_end_penalty;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "user_status")
+    @Column(name = "user_status", nullable = false)
     private USEnum status;
 
 
     /**
      * UserStatus GETTERS AND SETTERS
      */
+
     public Long getId() {
         return id;
     }
@@ -66,12 +65,12 @@ public class UserStatus {
         this.user = user;
     }
 
-    public Loan getFkLoan() {
-        return fkLoan;
+    public Loan getLoan() {
+        return loan;
     }
 
-    public void setFkLoan(Loan fkLoan) {
-        this.fkLoan = fkLoan;
+    public void setLoan(Loan loan) {
+        this.loan = loan;
     }
 
     public Date getDate_begin_penalty() {
