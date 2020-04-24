@@ -31,7 +31,6 @@ public class Booking {
     @Column(name = "booking_id", nullable = false)
     Long id;
 
-    @JsonBackReference(value="userbooking")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
@@ -49,7 +48,6 @@ public class Booking {
     @Column(name = "booking_status", nullable = false)
     private BookingStatus status;
 
-    @JsonManagedReference(value="booking")
     @OneToMany(
             mappedBy = "booking",
             cascade = CascadeType.ALL,

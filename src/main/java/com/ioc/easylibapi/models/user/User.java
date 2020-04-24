@@ -1,5 +1,6 @@
 package com.ioc.easylibapi.models.user;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.ioc.easylibapi.models.booking.Booking;
 import com.ioc.easylibapi.models.loan.Loan;
@@ -77,7 +78,7 @@ public class User implements UserDetails {
     private List<UserStatus> userStatus;
 
     //@JsonIgnore
-    @JsonManagedReference(value="userbooking")
+    @JsonBackReference(value="userbooking")
     @OneToMany(
             mappedBy = "user",
             cascade = CascadeType.ALL,

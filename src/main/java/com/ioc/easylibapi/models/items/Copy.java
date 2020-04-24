@@ -1,6 +1,7 @@
 package com.ioc.easylibapi.models.items;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.ioc.easylibapi.models.booking.BookingDetail;
 import com.ioc.easylibapi.models.enumerations.CopyStatus;
@@ -30,7 +31,6 @@ public class Copy {
     Long id;
 
     //@JsonIgnore
-    @JsonBackReference(value="item")
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = Item.class)
     @JoinColumn(name = "item_id", nullable = false)
     private Item item;
@@ -54,8 +54,7 @@ public class Copy {
     )
     private List<LoanDetail> loanDetails;
 
-    //@JsonIgnore
-    @JsonManagedReference(value="copybooking")
+    @JsonBackReference(value="booking_detail")
     @OneToMany(
             mappedBy = "copy",
             cascade = CascadeType.ALL,

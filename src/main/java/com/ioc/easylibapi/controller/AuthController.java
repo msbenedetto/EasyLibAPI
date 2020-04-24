@@ -61,7 +61,7 @@ public class AuthController {
      * The user has to provide his username and the password to access the resource
      * The method is also retrieving the type of role (admin or simple user)
      *
-     * @param  @RequestBody User : the User entity, stored in models   an absolute URL giving the base location of the image
+     * @param @RequestBody User : the User entity, stored in models   an absolute URL giving the base location of the image
      * @return 2 possibilities:
      * 1. an ok message with the TOKEN of the session
      * 2. a ko message in case the credentials are incorrect
@@ -71,11 +71,17 @@ public class AuthController {
         try {
             String username = user.getUsername();
             manager.authenticate(new UsernamePasswordAuthenticationToken(username, user.getPassword()));
-            List<String> roles = this.userRepository.findByUsername(username).getRoles().stream().map(role -> role.getRoleName()).collect(Collectors.toList());
-            String token = provider.createToken(username, roles);        Map<Object, Object> model = new HashMap<>();
+
+            User loggedUser = this.userRepository.findByUsername(username);
+            List<String> roles = loggedUser.getRoles().stream().map(role -> role.getRoleName()).collect(Collectors.toList());
+            Long userId = loggedUser.getUserId();
+            String token = provider.createToken(username, roles);
+            Map<Object, Object> model = new HashMap<>();
+
             model.put("username", username);
             model.put("token", token);
             model.put("roles", roles);
+            model.put("id", userId);
             return ok(model);
         } catch (AuthenticationException e) {
             return ResponseEntity.ok(new MessageResponse("Invalid username / password supplied!"));
@@ -89,7 +95,7 @@ public class AuthController {
      * The user has to provide mandatory information such as: username, password, email and cellphone
      * The other bits of information (firstname, address etc,) is not mandatory
      *
-     * @param  @Valid @RequestBody SignupRequest : the SignupRequest class, stored in payload/request
+     * @param @Valid @RequestBody SignupRequest : the SignupRequest class, stored in payload/request
      * @return different possibilities according to the actions
      * 1. user already exists in the db
      * 2. email already exists in the db
@@ -127,7 +133,6 @@ public class AuthController {
         userRepository.save(user);
         return ok(new MessageResponse("User registered successfully!"));
     }
-
 
 
     /**

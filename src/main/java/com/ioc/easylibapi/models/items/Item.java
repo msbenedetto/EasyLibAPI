@@ -1,5 +1,7 @@
 package com.ioc.easylibapi.models.items;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -40,8 +42,7 @@ public class Item {
     @Column(nullable = true)
     private String language;
 
-    //@JsonIgnore
-    @JsonManagedReference(value="item")
+    @JsonBackReference(value="copy")
     @OneToMany(
             mappedBy = "item",
             cascade = CascadeType.MERGE,
