@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
 public class BaseController<T> {
     // original:     "(\\w+?)(:|<|>)(\"([^\"]+)\")"
     // new:          "(\\w+?)(:|<|>)(\\w+?),"
-    public static final String QUERY_REGEX_PATTERN = "(\\w+?)(:|<|>)(\\w+?),";//"(\\w+?)(:|<|>)(\"([^\"]+)\")" ;
+    public static final String QUERY_REGEX_PATTERN = "([a-zA-Z][a-zA-Z0-9._]+)(:|::|<|>)([\\p{N}\\p{L}\\s-+@.:_\\/\\\\]+),";//"(\\w+?)(:|<|>)(\"([^\"]+)\")" ;
     protected static final String DEFAULT_PAGE = "0";
     protected static final String DEFAULT_SIZE = "20";
     protected static final String DEFAULT_SORT = "asc";
@@ -41,13 +41,11 @@ public class BaseController<T> {
 
         while (matcherMultiple.find()) {
 
-            SearchOperation searchOperation = SearchOperation.of(matcherMultiple.group(1));
+            String key = matcherMultiple.group(1);
+            String operation = matcherMultiple.group(2);
+            String value = matcherMultiple.group(3);
 
-            String key = matcherMultiple.group(2);
-            String operation = matcherMultiple.group(3);
-            String value = matcherMultiple.group(4);
-
-            builder.addSpecification(searchOperation, key, operation, value);
+            builder.addSpecification(key, operation, value);
         }
         return builder.getSpecification();
     }

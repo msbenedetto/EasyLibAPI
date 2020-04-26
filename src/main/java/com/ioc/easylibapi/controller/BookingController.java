@@ -2,6 +2,7 @@ package com.ioc.easylibapi.controller;
 
 
 import com.ioc.easylibapi.models.booking.Booking;
+import com.ioc.easylibapi.models.booking.BookingCreation;
 import com.ioc.easylibapi.services.BookingService;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -42,6 +43,11 @@ public class BookingController extends BaseController {
     @PostMapping
     public Booking insert(@RequestBody Booking booking) {
         return bookingService.insert(booking);
+    }
+
+    @PostMapping("/object")
+    public Booking insertBooking(@RequestBody BookingCreation booking) {
+        return bookingService.insertBooking(booking);
     }
 
     @PutMapping

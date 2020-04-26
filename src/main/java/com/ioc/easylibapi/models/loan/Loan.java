@@ -36,7 +36,6 @@ public class Loan {
      * booking_id : attribute links to the booking table
      * This attribute can be empty, as a user can make a booking and then transform it in a loan OR directly go to the library an make the loan
      */
-    @JsonBackReference(value="userloan")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
@@ -54,11 +53,9 @@ public class Loan {
     @Column(name = "loan_status", nullable = false)
     private LoanStatus status;
 
-    @JsonManagedReference(value="loan")
     @OneToMany(
             mappedBy = "loan",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
+            cascade = CascadeType.ALL
     )
     private List<LoanDetail> loanDetails;
 

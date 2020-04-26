@@ -4,8 +4,7 @@ package com.ioc.easylibapi.controller.utils;
 import java.util.Arrays;
 
 public enum SearchOperation {
-    AND(",AND,"),
-    OR(",OR,"),
+    AND(","),
     ;
 
     String literal;

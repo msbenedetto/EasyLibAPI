@@ -19,7 +19,7 @@ import java.util.List;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="item", discriminatorType = DiscriminatorType.INTEGER)
+@DiscriminatorColumn(name = "item", discriminatorType = DiscriminatorType.INTEGER)
 public class Item {
     @Id
     @SequenceGenerator(name = "seq_item", sequenceName = "seq_item", allocationSize = 1)
@@ -42,7 +42,7 @@ public class Item {
     @Column(nullable = true)
     private String language;
 
-    @JsonBackReference(value="copy")
+    @JsonIgnore
     @OneToMany(
             mappedBy = "item",
             cascade = CascadeType.MERGE,

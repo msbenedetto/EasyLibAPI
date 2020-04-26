@@ -14,5 +14,7 @@ public interface LoanDetailService {
 
     LoanDetail update(LoanDetail loanDetail) throws Exception;
 
+    LoanDetail returnDetail(LoanDetail loanDetail) throws Exception;
+
     void deleteById(Long id) throws Exception;
 }

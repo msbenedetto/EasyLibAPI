@@ -49,6 +49,11 @@ public class LoanDetailController extends BaseController {
         return loanDetailService.update(loanDetail);
     }
 
+    @PutMapping("/return")
+    public LoanDetail returnDetail(@RequestBody LoanDetail loanDetail) throws Exception {
+        return loanDetailService.returnDetail(loanDetail);
+    }
+
     @DeleteMapping("/{id}")
     public void delete(@PathVariable("id") Long id) throws Exception {
         loanDetailService.deleteById(id);

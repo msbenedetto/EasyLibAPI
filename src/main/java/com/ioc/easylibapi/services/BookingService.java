@@ -1,6 +1,7 @@
 package com.ioc.easylibapi.services;
 
 import com.ioc.easylibapi.models.booking.Booking;
+import com.ioc.easylibapi.models.booking.BookingCreation;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -11,6 +12,8 @@ public interface BookingService {
     Page<Booking> findAll(Specification<Booking> specs, Pageable pageable);
 
     Booking insert(Booking booking);
+
+    Booking insertBooking(BookingCreation booking);
 
     Booking update(Booking booking) throws Exception;
 

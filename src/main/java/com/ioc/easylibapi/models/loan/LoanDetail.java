@@ -1,6 +1,7 @@
 package com.ioc.easylibapi.models.loan;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ioc.easylibapi.models.enumerations.LoanStatus;
 import com.ioc.easylibapi.models.items.Copy;
 
@@ -25,14 +26,11 @@ public class LoanDetail {
     @Column(name = "ld_id")
     Long id;
 
-    //@JsonIgnore
-    @JsonBackReference(value="loan")
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "loan_id", nullable = false)
     private Loan loan;
 
-    //@JsonIgnore
-    @JsonBackReference(value="copyloan")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "copy_id", nullable = false)
     private Copy copy;

@@ -126,4 +126,6 @@ public class Booking {
     public void setLoan(Loan loan) {
         this.loan = loan;
     }
+
+
 }

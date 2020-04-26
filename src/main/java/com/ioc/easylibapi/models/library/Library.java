@@ -1,5 +1,7 @@
 package com.ioc.easylibapi.models.library;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.ioc.easylibapi.models.items.Copy;
 
@@ -39,7 +41,7 @@ public class Library {
     @Column(nullable = false)
     private String email;
 
-    @JsonManagedReference(value="library")
+    @JsonIgnore
     @OneToMany(
             mappedBy = "library",
             cascade = CascadeType.ALL,

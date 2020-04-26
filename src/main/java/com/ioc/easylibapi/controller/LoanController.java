@@ -2,6 +2,7 @@ package com.ioc.easylibapi.controller;
 
 
 import com.ioc.easylibapi.models.loan.Loan;
+import com.ioc.easylibapi.models.loan.LoanCreation;
 import com.ioc.easylibapi.services.LoanService;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -44,9 +45,19 @@ public class LoanController extends BaseController {
         return loanService.insert(loan);
     }
 
+    @PostMapping("/object")
+    public Loan insertLoan(@RequestBody LoanCreation loanCreation) {
+        return loanService.insertLoan(loanCreation);
+    }
+
     @PutMapping
     public Loan update(@RequestBody Loan loan) throws Exception {
         return loanService.update(loan);
+    }
+
+    @PutMapping("/return")
+    public Loan returnLoan(@RequestBody Loan loan) throws Exception {
+        return loanService.returnLoan(loan);
     }
 
     @DeleteMapping("/{id}")

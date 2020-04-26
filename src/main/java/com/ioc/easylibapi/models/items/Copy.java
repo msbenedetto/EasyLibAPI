@@ -30,13 +30,10 @@ public class Copy {
     @Column(name = "copy_id", nullable = false)
     Long id;
 
-    //@JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = Item.class)
     @JoinColumn(name = "item_id", nullable = false)
     private Item item;
 
-    //@JsonIgnore
-    @JsonBackReference(value="library")
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = Library.class)
     @JoinColumn(name = "library_id", nullable = false)
     private Library library;
@@ -45,8 +42,7 @@ public class Copy {
     @Column(name = "copy_status")
     private CopyStatus status;
 
-    //@JsonIgnore
-    @JsonManagedReference(value="copyloan")
+    @JsonIgnore
     @OneToMany(
             mappedBy = "copy",
             cascade = CascadeType.ALL,
@@ -54,7 +50,7 @@ public class Copy {
     )
     private List<LoanDetail> loanDetails;
 
-    @JsonBackReference(value="booking_detail")
+    @JsonIgnore
     @OneToMany(
             mappedBy = "copy",
             cascade = CascadeType.ALL,
