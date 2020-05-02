@@ -37,6 +37,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findByEmail(String email) throws Exception {
+        Optional<User> optional = userRepository.findByEmail(email);
+        if (!optional.isPresent()) {
+            throw new Exception("The User with Email: " + email + " couldn't be found.");
+        }
+        return optional.get();
+    }
+
+    @Override
     public Page<User> findAll(Specification<User> specs, Pageable pageable) {
         return userRepository.findAll(specs, pageable);
     }

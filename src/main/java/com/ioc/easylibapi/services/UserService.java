@@ -11,6 +11,8 @@ import java.util.List;
 public interface UserService {
     User findById(Long id) throws Exception;
 
+    User findByEmail(String email) throws Exception;
+
     Page<User> findAll(Specification<User> specs, Pageable pageable);
 
     User insert(User user);

@@ -35,6 +35,11 @@ public class UserController extends BaseController<User> {
         return userService.findById(id);
     }
 
+    @GetMapping("/email")
+    public User byEmail(@RequestParam(value = "user", required = true) String user) throws Exception {
+        return userService.findByEmail(user);
+    }
+
     @ApiResponses(value = {@ApiResponse(code = 200, message = "OK", response = User.class)})
     @GetMapping
     public Page<User> search(@RequestParam(value = "q", required = false, defaultValue = "") String search,
