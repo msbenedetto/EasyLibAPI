@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * Class BookingController
  * core class where are declared the methods allowing to extract / insert / update / delete the booking information
@@ -26,6 +28,12 @@ public class BookingController extends BaseController {
     @GetMapping("{id}")
     public Booking byId(@PathVariable("id") Long id) throws Exception {
         return bookingService.findById(id);
+    }
+
+    @GetMapping("user/{id}")
+    public List<Booking> byUser(@PathVariable("id") Long id) throws Exception {
+        System.out.println("---> "+id);
+        return bookingService.findByUser(id);
     }
 
 

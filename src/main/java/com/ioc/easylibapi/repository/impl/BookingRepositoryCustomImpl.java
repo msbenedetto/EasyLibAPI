@@ -5,6 +5,7 @@ import com.ioc.easylibapi.repository.BookingRepositoryCustom;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 public class BookingRepositoryCustomImpl implements BookingRepositoryCustom {
 
@@ -15,4 +16,11 @@ public class BookingRepositoryCustomImpl implements BookingRepositoryCustom {
     public void detach(Booking booking) {
         entityManager.detach(booking);
     }
+
+    @Override
+    public List<Booking> getByUser(Long userId) {
+        return null;
+    }
+
+
 }

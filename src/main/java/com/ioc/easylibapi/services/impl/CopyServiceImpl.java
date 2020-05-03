@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service("copyService")
@@ -59,5 +60,11 @@ public class CopyServiceImpl implements CopyService {
         }
         copyRepository.deleteById(id);
     }
+
+    @Override
+    public List<Copy> findByLibrary(Long libraryId) {
+        return copyRepository.findByLibraryId(libraryId);
+    }
+
 
 }

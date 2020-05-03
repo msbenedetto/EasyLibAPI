@@ -96,4 +96,9 @@ public class BookingServiceImpl implements BookingService {
         bookingRepository.deleteById(id);
     }
 
+    @Override
+    public List<Booking> findByUser(Long user_id) {
+        return bookingRepository.findByUserId(user_id);
+    }
+
 }
