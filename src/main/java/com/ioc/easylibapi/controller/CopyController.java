@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * Class CopyController
  * core class where are declared the methods allowing to extract / insert / update / delete the copy information
@@ -24,6 +26,11 @@ public class CopyController extends BaseController<Copy> {
     @GetMapping("{id}")
     public Copy byId(@PathVariable("id") Long id) throws Exception {
         return copyService.findById(id);
+    }
+
+    @GetMapping("library/{id}")
+    public List<Copy> byLibraryId(@PathVariable("id") Long id) throws Exception {
+        return copyService.findByLibrary(id);
     }
 
     @ApiResponses(value = {@ApiResponse(code = 200, message = "OK", response = Copy.class)})

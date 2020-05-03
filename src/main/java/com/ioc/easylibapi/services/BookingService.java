@@ -6,6 +6,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 
+import java.util.List;
+
 public interface BookingService {
     Booking findById(Long id) throws Exception;
 
@@ -18,4 +20,5 @@ public interface BookingService {
     Booking update(Booking booking) throws Exception;
 
     void deleteById(Long id) throws Exception;
+    List<Booking> findByUser(Long user_id);
 }
