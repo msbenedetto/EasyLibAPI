@@ -48,7 +48,7 @@ public class Library {
     @JsonIgnore
     @OneToMany(
             mappedBy = "library",
-            cascade = CascadeType.ALL,
+            cascade = CascadeType.MERGE,
             orphanRemoval = true
     )
     private List<Copy> copy;

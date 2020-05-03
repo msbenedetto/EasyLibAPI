@@ -45,7 +45,7 @@ public class Copy {
     @JsonIgnore
     @OneToMany(
             mappedBy = "copy",
-            cascade = CascadeType.ALL,
+            cascade = CascadeType.MERGE,
             orphanRemoval = false
     )
     private List<LoanDetail> loanDetails;
@@ -53,7 +53,7 @@ public class Copy {
     @JsonIgnore
     @OneToMany(
             mappedBy = "copy",
-            cascade = CascadeType.ALL,
+            cascade = CascadeType.MERGE,
             orphanRemoval = false
     )
     private List<BookingDetail> bookingDetails;
